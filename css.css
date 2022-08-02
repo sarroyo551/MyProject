@@ -1,0 +1,19 @@
+header {
+   text-align: center; 
+   padding: 20px;
+   background-color:rgb(204, 237, 169) ;
+}
+
+form {
+    text-align: center;
+    padding: 20px;
+}
+
+#myDiv {
+    text-align: center;
+}
+
+button {
+    border-radius: 25px
+}
+
