@@ -88,6 +88,7 @@ function renderArtists(artists) {
 function renderArtist(artist) {
   const container = document.createElement("div");
   container.classList.add("artist-container"); //made a div called container and made it the class of 'artist-container'
+  container.classList.add("center")//centering container div
 
   const nameEl = document.createElement("h1");
   nameEl.innerText = artist.name;//made a h1 that will be assigned to the artist name (the search answers will be h1s)
