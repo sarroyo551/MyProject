@@ -26,6 +26,12 @@ header {
     margin-bottom: 10px;
 }
 
+.row {
+    flex-direction: row;
+    justify-content: center;
+
+}
+
 #artist-name {
     padding: 10px;
     margin: 10px;
