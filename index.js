@@ -26,4 +26,28 @@ function makeRequest() {
       }, 1000);              //setTimeout will prevent user from clicking more than once a second
       return res.json();
     });
+}
+
+form.addEventListener("submit", (evt) => {
+    evt.preventDefault();
+  
+    currentPage = 0;
+    query = artistName.value; //query takes the artistName value
+    makeRequest() //calls makeRequest 
+      .then((data) => {
+        const artists = data.artists; //artist is assigned to the arists in the data
+        renderArtists(artists);
+        pages = Math.ceil(data.count / pageLength);
+        if (pages > 1) {
+          nextButton.removeAttribute("disabled");
+        }
+      })
+      .catch((err) => {});
+  });
+  
+  function updateQuery() {
+    makeRequest().then((data) => {
+      const artists = data.artists;
+      renderArtists(artists);
+    });
   }
