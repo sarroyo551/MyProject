@@ -43,11 +43,30 @@ form.addEventListener("submit", (evt) => {
         }
       })
       .catch((err) => {});
-  });
+});
   
-  function updateQuery() {
+function updateQuery() {
     makeRequest().then((data) => {
       const artists = data.artists;
       renderArtists(artists);
     });
+}
+
+nextButton.addEventListener("click", () => { //event listener (click) for nextButton
+    if (cooldown) {
+      return;
+    }
+    currentPage++; //incriments current page by one 
+    prevButton.removeAttribute("disabled");
+    if (currentPage === pages) {
+      nextButton.setAttribute("disabled", "");
+    }
+    updateQuery();
+  });
+
+
+
+function renderArtists(artists) {
+    artistResults.innerHTML = "";
+    artists.forEach(renderArtist);
   }
