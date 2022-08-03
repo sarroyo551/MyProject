@@ -2,28 +2,29 @@ body {
     background-color: grey;
 }
 
-#artist-results {
+/* #artist-results {
     display:flex;
     flex-direction: column;
     align-items: center;
-}
+} */
 
 header {
-    text-align: center;
     background-color: lightgray;
     padding: 5px;
 }
 
-form {
-    padding: 10px;
+.center {
     text-align: center;
 }
 
-#prev {
-    display: flex;
-    justify-content: center;
-} 
+.mb {
+    margin-bottom: 10px;
+}
 
+#artist-name {
+    padding: 10px;
+    margin: 10px;
+}
 
 .artist-container {
     display: flex;
