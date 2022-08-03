@@ -1,19 +1,10 @@
-header {
-   text-align: center; 
-   padding: 20px;
-   background-color:rgb(204, 237, 169) ;
+body {
+    background-color: grey;
 }
 
-form {
-    text-align: center;
-    padding: 20px;
-}
-
-#myDiv {
-    text-align: center;
-}
-
-button {
-    border-radius: 25px
+#artist-results {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 
