@@ -39,7 +39,7 @@ form.addEventListener("submit", (evt) => {
     .then((data) => {
       const artists = data.artists; //artist is assigned to the arists in the data
       renderArtists(artists);
-      pages = Math.ceil(data.count / pageLength); //rounding pages up with the argument of the count in the data by the pageLength (10)
+      pages = Math.ceil(data.count / pageLength); //calculating the number of pages by the number of responses by the number of entries per page
       if (pages > 1) { //once pages is greater than one the disabled button will be removed. next button is not disabled at the start
         nextButton.removeAttribute("disabled");
       }
@@ -70,11 +70,11 @@ nextButton.addEventListener("click", () => {
 prevButton.addEventListener("click", () => {
   //event listener (click) for prevButton
   if (cooldown) {
-    return;
+    return; //if you return here you wont get to to the end of the eventListener
   }
-  currentPage--; //deincriments current page by one
-  prevButton.removeAttribute("disabled");
-  if (currentPage === pages) {
+  currentPage--; //reduce current page by one
+  nextButton.removeAttribute("disabled");
+  if (currentPage === 0) {
     prevButton.setAttribute("disabled", "");
   }
   updateQuery();
