@@ -10,4 +10,32 @@ body {
 
 header {
     text-align: center;
+    background-color: lightgray;
+    padding: 5px;
+}
+
+form {
+    padding: 10px;
+    text-align: center;
+}
+
+#prev {
+    display: flex;
+    justify-content: center;
+} 
+
+
+.artist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50vw;
+    margin-bottom: 1rem;
+    background-color: white;
+    height: 5rem
+}
+
+.artist-container h1 {
+    font-weight: bold;
+    text-decoration: underline;
 }
