@@ -10,20 +10,20 @@ const pageLength = 10; //amount of artists is limited to 10 per page
 let currentPage = 0;
 let pages;
 let query;
-let cooldown = false; //will be used for setTimeout
+let cooldown = false; //will be used for setTimeout & makeRequest
 
 function makeRequest() {
-  if (cooldown) {
-    return Promise.reject("Too soon");
+  if (cooldown) { 
+    return Promise.reject("Too soon"); //stops user from  
   }
 
   cooldown = true;
 
   const url = `https://musicbrainz.org/ws/2/artist?query=${query}&fmt=json&limit=${pageLength}&offset=${
-    currentPage * pageLength
-  }`; //fetching data from API
-  return fetch(url).then((res) => {
-    setTimeout(() => {
+    currentPage * pageLength  
+  }`; //creating the API url with the current parameters (query, pageLength, currentPage * pageLength)
+  return fetch(url).then((res) => { 
+    setTimeout(() => { //used in order to make sure that we dont send the API request more than once per second
       cooldown = false;
     }, 1000); //setTimeout will prevent user from clicking more than once a second
     return res.json();
@@ -31,18 +31,19 @@ function makeRequest() {
 }
 
 form.addEventListener("submit", (evt) => {
-  evt.preventDefault();
+  evt.preventDefault(); // prevents the default behaviour of the browser
 
-  currentPage = 0;
-  query = artistName.value; //query takes the artistName value
-  makeRequest() //calls makeRequest
+  currentPage = 0; // on each new search make sure we're at page one
+  query = artistName.value; // we remember the value of the users query when the confirm their search
+  makeRequest() // calls makeRequest
     .then((data) => {
       const artists = data.artists; //artist is assigned to the arists in the data
       renderArtists(artists);
       pages = Math.ceil(data.count / pageLength); //calculating the number of pages by the number of responses by the number of entries per page
-      if (pages > 1) { //once pages is greater than one the disabled button will be removed. next button is not disabled at the start
-        nextButton.removeAttribute("disabled");
+      if (pages > 1) { //if we have more than one page we enable the next button
+        nextButton.removeAttribute("disabled"); 
       }
+      prevButton.setAttribute("disabled", ''); //since we start off at page 0 we disable the previous button
     })
     .catch((err) => {});
 });
