@@ -1,4 +1,4 @@
-const tagWhitelist = ["rock", "country", "pop"];
+const tagWhitelist = ["rock", "country", "pop", "hip hop", "blues", "alternative rock", "pop rock", "funk", "electronic music", "latin pop", "classical music", "soul music", "indie rock", "techno", "punk rock", "rhythm and blues", "R&B", "heavy metal", "jazz", "reggae", "k-pop", "house music", "disco" ];
 
 const form = document.querySelector("#artist-search"); // grabbing html elements
 const artistName = document.querySelector("#artist-name");
