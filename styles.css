@@ -11,6 +11,8 @@ body {
 header {
     background-color: lightgray;
     padding: 5px;
+    margin: 20px;
+    font-size: large;
 }
 
 .center {
