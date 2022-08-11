@@ -1,4 +1,4 @@
-const tagWhitelist = ["rock", "country", "pop", "hip hop", "blues", "alternative rock", "pop rock", "funk", "electronic music", "latin pop", "classical music", "soul music", "indie rock", "techno", "punk rock", "rhythm and blues", "R&B", "heavy metal", "jazz", "reggae", "k-pop", "house music", "disco", "rap", "folk", "EDM", "soul", "grunge", "gospel", "trap", ];
+const tagWhitelist = ["rock", "country", "pop", "hip hop", "blues", "alternative rock", "pop rock", "funk", "electronic music", "latin pop", "classical music", "soul music", "indie rock", "techno", "punk rock", "rhythm and blues", "R&B", "heavy metal", "jazz", "reggae", "k-pop", "house music", "disco", "rap", "folk", "EDM", "soul", "grunge", "gospel", "trap", "guitar music"];
 
 const form = document.querySelector("#artist-search"); // grabbing html elements
 const artistName = document.querySelector("#artist-name");
@@ -14,7 +14,7 @@ let cooldown = false; //will be used for setTimeout & makeRequest
 
 function makeRequest() {
   if (cooldown) { 
-    return Promise.reject("Too soon"); //stops user from  
+    return Promise.reject("Too soon"); 
   }
 
   cooldown = true;
@@ -29,6 +29,7 @@ function makeRequest() {
     return res.json();
   });
 }
+//console.log(makeRequest())
 
 form.addEventListener("submit", (evt) => {
   evt.preventDefault(); // prevents the default behaviour of the browser
@@ -48,7 +49,7 @@ form.addEventListener("submit", (evt) => {
     .catch((err) => {});
 });
 
-function updateQuery() {
+function updateQuery() { // 
   makeRequest().then((data) => {
     const artists = data.artists;
     renderArtists(artists);
@@ -81,9 +82,9 @@ prevButton.addEventListener("click", () => {
   updateQuery();
 });//almost identical to nextButton
 
-function renderArtists(artists) {
+function renderArtists(artists) { // renders data from artists into html
   artistResults.innerHTML = ""; //removes search answers once you look for a different artist
-  artists.forEach(renderArtist);
+  artists.forEach(renderArtist); //calls render artist for every artist in this list
 }
 
 function renderArtist(artist) {
@@ -113,3 +114,5 @@ function renderArtist(artist) {
 
   artistResults.appendChild(container);
 }
+
+

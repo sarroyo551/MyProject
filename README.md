@@ -5,7 +5,7 @@ My Music project
 
 My music project is a site made to look up artists and find information on them. 
 
-Once an artist is submitted into the form, the page will display any number of artists that match your search, this is due to the API.
+Once an artist is submitted into the form, the page will display a set number of artists that match your search, this is due to the API.
 
 The information available is the country or origin of the artist (if included in the API) as well as the genre (again, if included in the API).
 
@@ -18,5 +18,7 @@ The user will not be able to click the 'next' button more than once per second.
 The user will only be able to click the 'previous' button once the user has left the first 10 entries that match the artist the user has searched. 
 
 The 'previous' button will not be available to be clicked once the user has returned to the first page.
+
+
 
 
