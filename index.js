@@ -36,9 +36,10 @@ form.addEventListener("submit", (evt) => {
 
   currentPage = 0; // on each new search make sure we're at page one
   query = artistName.value; // we remember the value of the users query when the confirm their search
-  makeRequest() // calls makeRequest
+  makeRequest() // calls makeRequest, returns promise.. and THEN
     .then((data) => {
       const artists = data.artists; //artist is assigned to the arists in the data
+      //console.log(data.count) 
       renderArtists(artists);
       pages = Math.ceil(data.count / pageLength); //calculating the number of pages by the number of responses by the number of entries per page
       if (pages > 1) { //if we have more than one page we enable the next button
@@ -49,9 +50,11 @@ form.addEventListener("submit", (evt) => {
     .catch((err) => {});
 });
 
-function updateQuery() { // 
+
+function updateQuery() { 
   makeRequest().then((data) => {
     const artists = data.artists;
+    console.log(data.artists)
     renderArtists(artists);
   });
 }
@@ -84,7 +87,10 @@ prevButton.addEventListener("click", () => {
 
 function renderArtists(artists) { // renders data from artists into html
   artistResults.innerHTML = ""; //removes search answers once you look for a different artist
-  artists.forEach(renderArtist); //calls render artist for every artist in this list
+
+  for (let i = 0; i < artists.length; i++) {
+    renderArtist(artists[i]) //calls render artist for every artist passing artists at index i as argument
+  }
 }
 
 function renderArtist(artist) {
@@ -107,12 +113,12 @@ function renderArtist(artist) {
   if (artist.tags) {
     tagsEl.innerText = artist.tags //tagsEl should show the tags(gengre) of the artist as long as it is in the whitelist. if it is not, it will not show information. this is to prevent tags that are not the genre.
       .map((tag) => tag.name)
-      .filter((tagName) => tagWhitelist.includes(tagName))
+      .filter((tagName) => tagWhitelist.includes(tagName)) 
       .join();
   }
   container.appendChild(tagsEl); 
 
   artistResults.appendChild(container);
+
+
 }
-
-
