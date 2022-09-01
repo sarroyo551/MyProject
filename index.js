@@ -23,7 +23,8 @@ function makeRequest() {
     currentPage * pageLength  
   }`; 
   return fetch(url).then((res) => { 
-    setTimeout(() => { 
+    setTimeout(() => {
+
       cooldown = false;
     }, 1000); 
     return res.json();
@@ -38,6 +39,7 @@ form.addEventListener("submit", (evt) => {
   query = artistName.value; 
   makeRequest() 
     .then((data) => {
+      debugger 
       const artists = data.artists;
       //console.log(data.count) 
       renderArtists(artists);
@@ -115,7 +117,7 @@ function renderArtist(artist) {
     tagsEl.innerText = artist.tags 
       .map((tag) => tag.name)
       .filter((tagName) => tagWhitelist.includes(tagName)) 
-      .join();
+      .join(', ');
   }
   container.appendChild(tagsEl); 
 
