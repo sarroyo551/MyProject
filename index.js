@@ -10,27 +10,15 @@ const pageLength = 10;
 let currentPage = 0;
 let pages;
 let query;
-let cooldown = false;
 
 function makeRequest() {
-  if (cooldown) { 
-    return Promise.reject("Too soon"); 
-  }
-
-  cooldown = true;
 
   const url = `https://musicbrainz.org/ws/2/artist?query=${query}&fmt=json&limit=${pageLength}&offset=${
     currentPage * pageLength  
   }`; 
-  return fetch(url).then((res) => { 
-    setTimeout(() => {
-
-      cooldown = false;
-    }, 1000); 
-    return res.json();
-  });
+  return fetch(url).then((res) => res.json()); //triggering a fetch (get reqeust) to the musicbrainz API , and THEN when you get the response you are parsing the JSON
 }
-//console.log(makeRequest())
+
 
 form.addEventListener("submit", (evt) => {
   evt.preventDefault(); 
@@ -39,9 +27,8 @@ form.addEventListener("submit", (evt) => {
   query = artistName.value; 
   makeRequest() 
     .then((data) => {
-      debugger 
+      //debugger 
       const artists = data.artists;
-      //console.log(data.count) 
       renderArtists(artists);
       pages = Math.ceil(data.count / pageLength); 
       if (pages > 1) { 
@@ -49,7 +36,7 @@ form.addEventListener("submit", (evt) => {
       }
       prevButton.setAttribute("disabled", ''); 
     })
-    .catch((err) => {}); 
+    .catch((err) => console.log(err)); 
 
 });
 
@@ -63,10 +50,6 @@ function updateQuery() {
 }
 
 nextButton.addEventListener("click", () => {
-  
-  if (cooldown) {
-    return;
-  }
   currentPage++; 
   prevButton.removeAttribute("disabled");
   if (currentPage === pages) {
@@ -76,10 +59,6 @@ nextButton.addEventListener("click", () => {
 });
 
 prevButton.addEventListener("click", () => {
-  
-  if (cooldown) {
-    return; 
-  }
   currentPage--; 
   nextButton.removeAttribute("disabled");
   if (currentPage === 0) {
@@ -122,5 +101,4 @@ function renderArtist(artist) {
   container.appendChild(tagsEl); 
 
   artistResults.appendChild(container);
-
 }
